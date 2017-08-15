@@ -1,23 +1,49 @@
 import { Component } from  '@angular/core';
 
+interface Passenger {
+  id: number,
+  fullname: string,
+  checkedIn: boolean
+}
+
 @Component({
   selector: 'app-root',
   styleUrls:['app.component.scss'],
   template: `
     <div class="app">
-      <button (click)="handleClick(username.value)">
-        Get value
-      </button>
-      <input type="text" #username>
-      <div>{{ name }}</div>
+      <h3>Airline Passengers</h3>
+      <ul>
+
+        <template ngFor let-passenger let-i="index" [ngForOf]="passengers">
+
+          <li *ngFor="let passenger of passengers; let i = index;">
+            {{i}}: {{passenger.fullname}}
+          </li>
+
+        </template>
+
+      </ul>
+      <ul>
+
+        <li *ngFor="let passenger of passengers; let i = index;">
+          {{i}}: {{passenger.fullname}}
+        </li>
+
+      </ul>
     </div>
   `
 })
 export class AppComponent {
-  name: string  = 'Todd';
-  handleClick(value: string) {
-    // this.name = value;
-    console.log(value);
+  passengers: Passenger[] = [{
+    id: 1,
+    fullname: 'Stephen',
+    checkedIn: true
+  }, {
+    id: 2,
+    fullname: 'Rose',
+    checkedIn: false
+
   }
 
+  ]
 }
